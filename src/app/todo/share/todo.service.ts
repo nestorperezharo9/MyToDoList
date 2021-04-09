@@ -8,13 +8,13 @@ export class TodoService {
 
   getToDoList() {
     this.toDoList = this.firebasedb.list('titles');
-    return this.toDoList;
+    return this.toDoList;   //se devuelve la lista que tenga la base de datos actual
   }
 
   addTitle(title: string) {
     this.toDoList.push({
       title: title,
-      isChecked: false
+      isChecked: false    //siempre que se añada va a ser false
     });
   }
 

@@ -1,0 +1,26 @@
+/*
+h1{
+    font-family: 'Patrick Hand', cursive;
+}
+
+ul > li{
+    display: grid;
+    grid-template-columns: .5fr 2.5fr .5fr .5fr;
+}
+
+li > *{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+li{
+    background-color:	#ffffff85;
+    margin: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 2rem;
+    line-height: 1.5em;
+    border-radius: 10px;
+}
+*/
