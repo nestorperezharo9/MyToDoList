@@ -4,6 +4,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
 @Injectable()
 export class TodoService {
   toDoList: AngularFireList<any>;
+  listDone: AngularFireList<any>;
   constructor(private firebasedb: AngularFireDatabase) {}
 
   getToDoList() {
@@ -24,6 +25,13 @@ export class TodoService {
 
   removeTitle($key: string) {
     this.toDoList.remove($key);
+  }
+
+  addTitleDone( title: string) {
+    this.listDone.push({
+      title: title,
+      isChecked: true    //siempre que se añada va a ser false
+    });
   }
 
 }

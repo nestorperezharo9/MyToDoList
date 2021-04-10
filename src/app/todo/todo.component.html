@@ -1,17 +1,19 @@
-<div class="container" style="padding:45px 0px">
+<div class="all">
+  <div class="container" style="padding:45px 0px">
     <h4 class="page-header text-center">MY TO DO LIST</h4> <hr>
-</div>
+  </div>
     
-    <div>
-      <input type="text" placeholder="Write here" class="form-control" #itemTitle>
-      <div class="form-control addInput" (click)="onAdd(itemTitle)">
-        <i class="fa fa-plus-circle fa-2x  hover-cursor"> Add</i>
-      </div>
-    </div><br><br>
+  <div>
+    <input type="text" placeholder="Write here" class="form-control" #itemTitle>
+    <div class="form-control addInput" (click)="onAdd(itemTitle)" style="background-color: #D9FEED;">
+      <i class="fa fa-plus-circle fa-2x  hover-cursor" style="color:green"> Add</i>
+    </div>
+  </div><br><br>
     
-    <div>
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-info" *ngFor="let item of toDoListArray">
+  <div>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info" *ngFor="let item of toDoListArray">
+        <div *ngIf="!item.isChecked">
           <span class="hover-cursor pull-left" [class.text-success]="item.isChecked" (click)="alterCheck(item.$key,item.isChecked)">
             <i class="btn btn-success fa fa-lg" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"> done</i>
           </span>
@@ -19,6 +21,24 @@
           <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
             <i class="fa fa-trash"></i>
           </span>
+        </div>
+      </li>
+    </ul>
+  </div> <br><br><br> 
+
+  <div class="container" style="padding:45px 0px">
+    <h4 class="page-header text-center">DONE LIST</h4><hr>
+  </div>
+    <div>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-info" *ngFor="let item of toDoListArray">
+          <div *ngIf="item.isChecked">
+            <span class="text-center">{{item.title}}</span>
+            <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
+            <i class="fa fa-trash"></i>
+            </span>
+          </div>
         </li>
       </ul>
     </div>
+</div>
