@@ -9,13 +9,18 @@
       <i class="fa fa-plus-circle fa-2x  hover-cursor" style="color:green"> Add</i>
     </div>
   </div><br><br>
-    
+</div>
+
+  <div class="tables">
+  <div class="container" style="padding:45px 0px">
+    <h4 class="page-header text-center">PENDING LIST</h4><hr>
+  </div>
   <div>
     <ul class="list-group">
       <li class="list-group-item list-group-item-info" *ngFor="let item of toDoListArray">
-        <div *ngIf="!item.isChecked">
+        <div *ngIf="item.isChecked==0">
           <span class="hover-cursor pull-left" [class.text-success]="item.isChecked" (click)="alterCheck(item.$key,item.isChecked)">
-            <i class="btn btn-success fa fa-lg" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"> done</i>
+            <i class="btn btn-success fa fa-lg" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"> do </i>
           </span>
           <span class="text-center">{{item.title}}</span>
           <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
@@ -24,15 +29,19 @@
         </div>
       </li>
     </ul>
-  </div> <br><br><br> 
+  </div>
+</div> <br><br><br> 
 
   <div class="container" style="padding:45px 0px">
-    <h4 class="page-header text-center">DONE LIST</h4><hr>
+    <h4 class="page-header text-center">IN PROGRESS LIST</h4><hr>
   </div>
     <div>
       <ul class="list-group">
         <li class="list-group-item list-group-item-info" *ngFor="let item of toDoListArray">
-          <div *ngIf="item.isChecked">
+          <div *ngIf="item.isChecked==1">
+            <span class="hover-cursor pull-left" [class.text-success]="item.isChecked" (click)="alterCheck(item.$key,item.isChecked)">
+              <i class="btn btn-success fa fa-lg" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"> done </i>
+            </span>
             <span class="text-center">{{item.title}}</span>
             <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
             <i class="fa fa-trash"></i>
@@ -40,5 +49,20 @@
           </div>
         </li>
       </ul>
+    </div> <br><br><br> 
+
+    <div class="container" style="padding:45px 0px">
+      <h4 class="page-header text-center">DONE LIST</h4><hr>
     </div>
-</div>
+      <div class="final">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-info" *ngFor="let item of toDoListArray">
+            <div *ngIf="item.isChecked==2">
+              <span class="text-center">{{item.title}}</span>
+              <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
+              <i class="fa fa-trash"></i>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>

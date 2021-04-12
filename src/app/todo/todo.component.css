@@ -11,6 +11,15 @@
     padding: 3%;
     background-color: #EAE9EA;
 }
+
+i {
+    margin-right:20px;
+}
+
+.final {
+    margin-bottom: 25px;
+}
+
 /*
 h1{
     font-family: 'Patrick Hand', cursive;
