@@ -9,6 +9,10 @@ import { TodoService } from './share/todo.service';
 })
 export class TodoComponent implements OnInit {
   toDoListArray : any[];
+  beforeEditing: string;
+  ordenar: boolean;
+  arriba: boolean;
+
   constructor(private toDoService: TodoService) { }
 
   ngOnInit(): void {
@@ -21,7 +25,7 @@ export class TodoComponent implements OnInit {
         this.toDoListArray.push(x);
       })
       this.toDoListArray.sort((a,b) => {
-        return a.isChecked - b.isChecked;
+        return a.state - b.state;
       })
     });
   }
@@ -31,12 +35,53 @@ export class TodoComponent implements OnInit {
     itemTitle.value = null;
   }
 
-  alterCheck($key: string,isChecked) {
-    this.toDoService.checkOrUnCheckTitle($key,isChecked+1);
+  alterCheck($key: string,state) {
+    this.toDoService.checkOrUnCheckTitle($key,state+1);
+  }
+
+  alterCheck2($key: string,state) {
+    this.toDoService.checkOrUnCheckTitle($key,state-1);
   }
 
   onDelete($key : string){
     this.toDoService.removeTitle($key);
+  }
+
+  titleOrder(arriba: boolean = true){
+    this.toDoListArray = this.toDoListArray.sort( (a, b) => {
+      if(a.title.toLocaleLowerCase() < b.title.toLocaleLowerCase()) {
+        if (arriba) {
+          return -1;
+        } else {
+          return 1
+        }
+      }
+      else if (a.title.toLocaleLowerCase() > b.title.toLocaleLowerCase()){
+        if (arriba) {
+          return 1;
+        } else {
+          return -1
+        }
+      }
+      else return 0
+    });
+    this.ordenar = true;
+    this.arriba = arriba;
+  }
+
+  stateOrder(arriba: boolean = true){
+    if (arriba) {
+      this.toDoListArray = this.toDoListArray.sort( (a, b) => (b.state - a.state));
+    } else {
+      this.toDoListArray = this.toDoListArray.sort( (a, b) => (a.state - b.state));
+    }
+    this.ordenar = false;
+    this.arriba = arriba;
+  }
+  
+  editTask($key: string, event: any){
+    event.editing = !event.editing;
+    this.toDoListArray[$key] = event;
   }
 
 }

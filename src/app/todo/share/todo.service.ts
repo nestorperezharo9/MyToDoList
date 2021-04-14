@@ -15,12 +15,17 @@ export class TodoService {
   addTitle(title: string) {
     this.toDoList.push({
       title: title,
-      isChecked: 0,    //siempre que se añada va a ser 0
+      state: 0,    //siempre que se añada va a ser 0
+      editing: false
     });
   }
 
-  checkOrUnCheckTitle($key: string, int: boolean) {
-    this.toDoList.update($key, { isChecked: int });
+  editTitle($key: string, editing: boolean, title: string) {
+    this.toDoList.update($key, {editing: true});
+  }
+
+  checkOrUnCheckTitle($key: string, int: number) {
+    this.toDoList.update($key, { state: int });
   }
 
   removeTitle($key: string) {

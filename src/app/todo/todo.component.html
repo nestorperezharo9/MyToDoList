@@ -11,53 +11,69 @@
   </div><br><br>
 </div>
 
-  <div class="tables">
+
   <div class="container" style="padding:45px 0px">
     <h4 class="page-header text-center">PENDING LIST</h4><hr>
+    <h5>Orden:</h5>
+    <span (click)="titleOrder()" > 
+      <i class="btn btn-success fa fa-lg margen">Alfabético</i>
+    </span>
+    <span (click)="titleOrder(false)" > 
+      <i class="btn btn-success fa fa-lg margen">!Alfabético</i>
+    </span>
+
+    <span [class.iconActive]="!ordenar && !arriba" (click)="stateOrder(false)" >
+      <i class="btn btn-success fa fa-lg margen">Estado</i>
+    </span>
+    <span class="oi oi-chevron-bottom iconStyle" [class.iconActive]="!ordenar && arriba" (click)="stateOrder()">
+      <i class="btn btn-success fa fa-lg margen">!Estado</i>
+    </span>
+
+
   </div>
   <div>
     <ul class="list-group">
       <li class="list-group-item list-group-item-info" *ngFor="let item of toDoListArray">
-        <div *ngIf="item.isChecked==0">
-          <span class="hover-cursor pull-left" [class.text-success]="item.isChecked" (click)="alterCheck(item.$key,item.isChecked)">
-            <i class="btn btn-success fa fa-lg" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"> do </i>
+        <div *ngIf="item.state==0">
+          <li>
+          <span class="hover-cursor pull-left" [class.text-success]="item.state" (click)="alterCheck(item.$key,item.state)">
+            <i class="btn btn-success fa fa-lg margen" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"> do </i>
           </span>
-          <span class="text-center">{{item.title}}</span>
+          <span class="text-center">{{item.title}}   |   ''pendiente''</span>
           <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
             <i class="fa fa-trash"></i>
           </span>
+        </li>
+        </div>
+
+        <div *ngIf="item.state==1">
+          <li>
+          <span class="hover-cursor pull-left" [class.text-success]="item.state" (click)="alterCheck(item.$key,item.state)">
+            <i class="btn btn-success fa fa-lg margen" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"> done </i>
+          </span>
+          <span class="text-center">{{item.title}}   |   ''en progreso''</span>
+          <span class="hover-cursor pull-left" [class.text-success]="item.state" (click)="alterCheck2(item.$key,item.state)">
+            <i class="btn btn-warning margen" [ngClass]="item.state">return</i>
+          </span>
+          <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
+            <i class="fa fa-trash"></i>
+          </span>
+        </li>
         </div>
       </li>
     </ul>
-  </div>
-</div> <br><br><br> 
-
-  <div class="container" style="padding:45px 0px">
-    <h4 class="page-header text-center">IN PROGRESS LIST</h4><hr>
-  </div>
-    <div>
-      <ul class="list-group">
-        <li class="list-group-item list-group-item-info" *ngFor="let item of toDoListArray">
-          <div *ngIf="item.isChecked==1">
-            <span class="hover-cursor pull-left" [class.text-success]="item.isChecked" (click)="alterCheck(item.$key,item.isChecked)">
-              <i class="btn btn-success fa fa-lg" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"> done </i>
-            </span>
-            <span class="text-center">{{item.title}}</span>
-            <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
-            <i class="fa fa-trash"></i>
-            </span>
-          </div>
-        </li>
-      </ul>
-    </div> <br><br><br> 
+  </div><br><br>
 
     <div class="container" style="padding:45px 0px">
-      <h4 class="page-header text-center">DONE LIST</h4><hr>
+      <h4 class="page-header text-center">DONE LIST 'HISTÓRICO'</h4><hr>
     </div>
       <div class="final">
         <ul class="list-group">
           <li class="list-group-item list-group-item-info" *ngFor="let item of toDoListArray">
-            <div *ngIf="item.isChecked==2">
+            <div *ngIf="item.state==2">
+              <span class="hover-cursor pull-left" [class.text-success]="item.state" (click)="alterCheck2(item.$key,item.state)">
+                <i class="btn btn-warning margen" [ngClass]="item.state">return</i>
+              </span>
               <span class="text-center">{{item.title}}</span>
               <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
               <i class="fa fa-trash"></i>

@@ -12,13 +12,18 @@
     background-color: #EAE9EA;
 }
 
-i {
+.margen {
     margin-right:20px;
 }
 
 .final {
     margin-bottom: 25px;
 }
+
+.li {
+    border-bottom: 12px solid black;
+}
+
 
 /*
 h1{
