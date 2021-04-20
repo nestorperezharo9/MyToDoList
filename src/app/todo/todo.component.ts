@@ -9,6 +9,7 @@ import { TodoService } from './share/todo.service';
 })
 export class TodoComponent implements OnInit {
   toDoListArray : any[];
+  toDoListDone: any[];
   beforeEditing: string;
   ordenar: boolean;
   arriba: boolean;
@@ -24,9 +25,9 @@ export class TodoComponent implements OnInit {
         x["$key"] = element.key;
         this.toDoListArray.push(x);
       })
-      this.toDoListArray.sort((a,b) => {
-        return a.state - b.state;
-      })
+      //this.toDoListArray.sort((a,b) => {
+        //return a.state - b.state;
+      //})
     });
   }
 
@@ -74,6 +75,16 @@ export class TodoComponent implements OnInit {
       this.toDoListArray = this.toDoListArray.sort( (a, b) => (b.state - a.state));
     } else {
       this.toDoListArray = this.toDoListArray.sort( (a, b) => (a.state - b.state));
+    }
+    this.ordenar = false;
+    this.arriba = arriba;
+  }
+
+  dateOrder(arriba: boolean = true) {
+    if (arriba) {
+      this.toDoListArray = this.toDoListArray.sort( (a, b) => (b.timestamp - a.timestamp));
+    } else {
+      this.toDoListArray = this.toDoListArray.sort( (a, b) => (a.timestamp - b.timestamp));
     }
     this.ordenar = false;
     this.arriba = arriba;

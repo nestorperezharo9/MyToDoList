@@ -1,5 +1,11 @@
+html,body{
+    margin:0px;
+    height:100%;
+}
+
 .container {
-    background-color: #F9DEFF;
+    background-color: #EAEAEA;
+    padding: 40px;
 }
 .all {
     position: relative;
@@ -13,17 +19,24 @@
 }
 
 .margen {
-    margin-right:20px;
+    margin-right:8px;
 }
 
 .final {
     margin-bottom: 25px;
 }
 
-.li {
-    border-bottom: 12px solid black;
+.separar {
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
+li {
+    background-color: rgb(181, 234, 250);
+    margin: 4px;
+    border-radius: 10px;
+    /*border-bottom: 1px solid black;*/
+}
 
 /*
 h1{
