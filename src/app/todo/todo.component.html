@@ -14,68 +14,67 @@
 
 <div class="container" style="margin: 5px 0px">
   <h4 class="page-header text-center">PENDING LIST</h4> <hr>
-  <h5>Orden:</h5>
-  <span (click)="titleOrder()" > 
-    <i class="btn btn-success fa fa-lg margen">Alfabético</i>
-  </span>
-  <span (click)="titleOrder(false)" > 
-    <i class="btn btn-success fa fa-lg margen">!Alfabético</i>
-  </span>
+  <mat-form-field appearance="fill" class="apariencia">
+    <mat-label>Order</mat-label>
+    <mat-select>
+      <mat-option (click)="titleOrder()" value="Alfabético">Alfabético</mat-option>
+      <mat-option (click)="titleOrder(false)">!Alfabético</mat-option>
+      <mat-option [class.iconActive]="!ordenar && !arriba" (click)="stateOrder(false)" value="Estado">Estado</mat-option>
+      <mat-option [class.iconActive]="!ordenar && arriba" (click)="stateOrder()" value="!Estado">!Estado</mat-option>
+      <mat-option [class.iconActive]="!ordenar && !arriba" (click)="dateOrder(false)" value="Fecha">Fecha</mat-option>
+      <mat-option [class.iconActive]="!ordenar && arriba" (click)="dateOrder()" value="!Fecha">!Fecha</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <span [class.iconActive]="!ordenar && !arriba" (click)="stateOrder(false)" >
-    <i class="btn btn-success fa fa-lg margen">Estado</i>
-  </span>
-  <span class="oi oi-chevron-bottom iconStyle" [class.iconActive]="!ordenar && arriba" (click)="stateOrder()">
-    <i class="btn btn-success fa fa-lg margen">!Estado</i>
-  </span>
-
-  <span [class.iconActive]="!ordenar && !arriba" (click)="dateOrder(false)" >
-    <i class="btn btn-success fa fa-lg margen">Fecha</i>
-  </span>
-  <span class="oi oi-chevron-bottom iconStyle" [class.iconActive]="!ordenar && arriba" (click)="dateOrder()">
-    <i class="btn btn-success fa fa-lg margen">!Fecha</i>
-  </span>
 </div>
 
 <ul class="list-group" *ngFor="let item of toDoListArray">
   <li class="list-group-item">
     <!-- Se crea o pasa a estado 'pendiente'-->
     <div *ngIf="item.state==0">
-        <span class="hover-cursor pull-left" [class.text-success]="item.state" (click)="alterCheck(item.$key,item.state)">
-          <i class="btn btn-success fa fa-lg margen" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"> do </i>
-        </span>
-        <span class="text-center">{{item.title}}  <span class="separar">-></span> <span class="fas fa-splotch"> Pending</span> </span>
-        <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
-          <i class="fa fa-trash"></i>
-        </span>
+      <button mat-mini-fab class="pull-left margen" color="green" [class.text-success]="item.state" (click)="alterCheck(item.$key,item.state)">
+        <mat-icon>build</mat-icon>
+      </button>
+
+      <span class="text-center">{{item.title}} </span> 
+        
+      <button mat-mini-fab class="pull-right" color="warn" (click)="onDelete(item.$key)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
 
     <!-- Pasa a estado 'en progreso'-->
     <div *ngIf="item.state==1">
-        <span class="hover-cursor pull-left" [class.text-success]="item.state" (click)="alterCheck(item.$key,item.state)">
-          <i class="btn btn-success fa fa-lg margen" [ngClass]="item.isChecked?'fa-check-circle-o':'fa-circle-thin'"> done </i>
-          
-        </span>
-        <span class="text-center">{{item.title}}   <span class="separar">-></span> <span class="fa fa-spinner fa-pulse"> </span></span>
-        <span class="hover-cursor pull-left" [class.text-success]="item.state" (click)="alterCheck2(item.$key,item.state)">
-          <i class="btn btn-warning margen" [ngClass]="item.state">return</i>
-        </span>
-        <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
-          <i class="fa fa-trash"></i>
-        </span>
+      <button mat-mini-fab class="pull-left margen return" [class.text-success]="item.state" (click)="alterCheck2(item.$key,item.state)">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+      <button mat-mini-fab class="pull-left margen green" [class.text-success]="item.state" (click)="alterCheck(item.$key,item.state)">
+        <mat-icon>check_circle_outline</mat-icon>
+      </button>
+
+      <span class="text-center">{{item.title}}   <mat-spinner [diameter]="18" class="rigth"></mat-spinner></span>
+
+      <button mat-mini-fab class="pull-right" color="warn" (click)="onDelete(item.$key)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
 
     <!-- Pasa a estado 'done'-->
     <div *ngIf="item.state==2">
-      <span class="hover-cursor pull-left" [class.text-success]="item.state" (click)="alterCheck2(item.$key,item.state)">
-        <i class="btn btn-warning margen" [ngClass]="item.state">return</i>
-      </span>
-      <span class="text-center">{{item.title}}   <span class="separar">-></span> <span class="fa fa-check-square"> Done</span> </span>
-      <span class="btn btn-danger listBtn pull-right hover-cursor" (click)="onDelete(item.$key)">
-        <i class="fa fa-trash"></i>
-      </span>
+      <button mat-mini-fab class="pull-left margen return" [class.text-success]="item.state" (click)="alterCheck2(item.$key,item.state)">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+      <span class="text-center">{{item.title}}  </span>
+
+      <button mat-mini-fab class="pull-right" color="warn" (click)="onDelete(item.$key)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <mat-icon class="done pull-right">check_circle</mat-icon>
     </div>
   </li>
+  <div><input title="form" type="text" class="colorear" placeholder="Edite aquí" #itemTitle > 
+    <span class="hover-cursor" (click)="edit(item.$key,item,itemTitle)"><mat-icon mat-list-icon>edit</mat-icon> </span>
+  </div>
 </ul>
 <br><br>
 

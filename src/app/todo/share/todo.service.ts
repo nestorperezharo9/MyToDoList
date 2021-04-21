@@ -23,8 +23,9 @@ export class TodoService {
     });
   }
 
-  editTitle($key: string, editing: boolean, title: string) {
-    this.toDoList.update($key, {editing: true});
+  editItem(itemKey,item){
+    const itemUpdate = this.firebasedb.list('titles');
+    itemUpdate.update(itemKey,{title:item.title});
   }
 
   checkOrUnCheckTitle($key: string, int: number) {

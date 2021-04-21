@@ -36,6 +36,12 @@ export class TodoComponent implements OnInit {
     itemTitle.value = null;
   }
 
+  edit($key: string,item,itemTitle){
+    item.title = itemTitle.value;
+    this.toDoService.editItem($key,item);
+    itemTitle.value = null;
+  }
+
   alterCheck($key: string,state) {
     this.toDoService.checkOrUnCheckTitle($key,state+1);
   }
