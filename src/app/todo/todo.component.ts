@@ -25,9 +25,6 @@ export class TodoComponent implements OnInit {
         x["$key"] = element.key;
         this.toDoListArray.push(x);
       })
-      //this.toDoListArray.sort((a,b) => {
-        //return a.state - b.state;
-      //})
     });
   }
 
@@ -42,11 +39,11 @@ export class TodoComponent implements OnInit {
     itemTitle.value = null;
   }
 
-  alterCheck($key: string,state) {
+  alterState($key: string,state: number) {
     this.toDoService.checkOrUnCheckTitle($key,state+1);
   }
 
-  alterCheck2($key: string,state) {
+  alterState2($key: string,state: number) {
     this.toDoService.checkOrUnCheckTitle($key,state-1);
   }
 
@@ -94,11 +91,6 @@ export class TodoComponent implements OnInit {
     }
     this.ordenar = false;
     this.arriba = arriba;
-  }
-  
-  editTask($key: string, event: any){
-    event.editing = !event.editing;
-    this.toDoListArray[$key] = event;
   }
 
 }

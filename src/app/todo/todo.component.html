@@ -13,7 +13,7 @@
 
 
 <div class="container" style="margin: 5px 0px">
-  <h4 class="page-header text-center">PENDING LIST</h4> <hr>
+  <h4 class="page-header text-center">LIST OF TASKS</h4> <hr>
   <mat-form-field appearance="fill" class="apariencia">
     <mat-label>Order</mat-label>
     <mat-select>
@@ -32,7 +32,7 @@
   <li class="list-group-item">
     <!-- Se crea o pasa a estado 'pendiente'-->
     <div *ngIf="item.state==0">
-      <button mat-mini-fab class="pull-left margen" color="green" [class.text-success]="item.state" (click)="alterCheck(item.$key,item.state)">
+      <button mat-mini-fab class="pull-left margen" color="green" [class.text-success]="item.state" (click)="alterState(item.$key,item.state)">
         <mat-icon>build</mat-icon>
       </button>
 
@@ -45,10 +45,10 @@
 
     <!-- Pasa a estado 'en progreso'-->
     <div *ngIf="item.state==1">
-      <button mat-mini-fab class="pull-left margen return" [class.text-success]="item.state" (click)="alterCheck2(item.$key,item.state)">
+      <button mat-mini-fab class="pull-left margen return" [class.text-success]="item.state" (click)="alterState2(item.$key,item.state)">
         <mat-icon>autorenew</mat-icon>
       </button>
-      <button mat-mini-fab class="pull-left margen green" [class.text-success]="item.state" (click)="alterCheck(item.$key,item.state)">
+      <button mat-mini-fab class="pull-left margen green" [class.text-success]="item.state" (click)="alterState(item.$key,item.state)">
         <mat-icon>check_circle_outline</mat-icon>
       </button>
 
@@ -61,7 +61,7 @@
 
     <!-- Pasa a estado 'done'-->
     <div *ngIf="item.state==2">
-      <button mat-mini-fab class="pull-left margen return" [class.text-success]="item.state" (click)="alterCheck2(item.$key,item.state)">
+      <button mat-mini-fab class="pull-left margen return" [class.text-success]="item.state" (click)="alterState2(item.$key,item.state)">
         <mat-icon>autorenew</mat-icon>
       </button>
       <span class="text-center">{{item.title}}  </span>

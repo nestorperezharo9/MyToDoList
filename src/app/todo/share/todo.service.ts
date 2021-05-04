@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
-import { timestamp } from 'rxjs/operators';
 
 @Injectable()
 export class TodoService {
   toDoList: AngularFireList<any>;
+  
   constructor(private firebasedb: AngularFireDatabase) {}
 
   getToDoList() {
@@ -19,7 +19,6 @@ export class TodoService {
       title: title,
       state: 0,    //siempre que se añada va a ser 0
       timestamp,
-      editing: false
     });
   }
 
